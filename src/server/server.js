@@ -22,9 +22,9 @@ import { handler as ssrHandler } from '../hub-web/dist/server/entry.mjs';
 import express from 'express';
 import cors from 'cors';
 
-import loadService from './services/loadService';
-import persistentStore from './store/persistentStore';
-import initRotutes from './routes';
+import { loadAPIVersions } from './services/loadService.js';
+import persistentStore from './store/persistentStore.js';
+import initRotutes from './routes.js';
 
 // Retrieve config
 const port = process.env.PORT || 4000;
@@ -48,7 +48,7 @@ const server = app.listen(port, '0.0.0.0', function(){
 });
 
 const loadedAPIVersions = () => {
-  loadService.loadAPIVersions();
+  loadAPIVersions();
 };
 
 persistentStore.initialize(loadedAPIVersions)
